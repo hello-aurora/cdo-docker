@@ -1,21 +1,19 @@
 FROM node:20-alpine
 
-RUN apk add --update --no-cache \
-    # Nedded for `zlib`
+RUN apk add --no-cache \
+    # Libraries required for `wget`
     alpine-sdk \
-    # Nedded for `netcdf`
-    py-pip \
-    alpine-sdk \
-    autoconf \
-    automake \
-    libxml2-dev \
+    # Libraries required for `netcdf`
     curl-dev \
-    bash \
-    # Nedded for `eccodes`
+    libxml2-dev \
+    m4 \
+    # Libraries required for `eccodes`
     cmake \
-    libpng-dev \
     libaec-dev \
-    # Needed for `cdo`
+    libpng-dev \
+    perl \
+    python3 \
+    # Libraries required for `cdo`
     bsd-compat-headers
 
 WORKDIR /libraries
@@ -69,7 +67,6 @@ RUN wget -O eccodes.tar.gz https://confluence.ecmwf.int/download/attachments/457
     && cmake \
       -DENABLE_NETCDF=ON \
       -DENABLE_PNG=ON \
-      -DENABLE_PYTHON=OFF \
       -DENABLE_ECCODES_THREADS=ON \
       -DENABLE_FORTRAN=OFF \
       -DCMAKE_INSTALL_PREFIX=/usr/local \
