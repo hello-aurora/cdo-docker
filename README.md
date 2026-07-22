@@ -40,6 +40,7 @@ To build a new tag of the image and push to Docker Hub:
 docker build --platform="linux/amd64" -f Dockerfile.X-alpine -t jeremybarbet/cdo:X-alpine .
 docker push jeremybarbet/cdo:X-alpine
 ```
+
 ### Bookworm images
 
 ```bash

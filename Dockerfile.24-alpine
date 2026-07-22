@@ -14,7 +14,10 @@ RUN apk add --no-cache \
     perl \
     python3 \
     # Libraries required for `cdo`
-    bsd-compat-headers
+    bsd-compat-headers \
+    # Libraries required for `tippecanoe`
+    sqlite-dev \
+    bash
 
 WORKDIR /libraries
 
@@ -91,3 +94,12 @@ RUN wget -O cdo.tar.gz https://code.mpimet.mpg.de/attachments/download/${CDO_VER
       --disable-dependency-tracking \
     && make \
     && make install
+
+# Download and build tippecanoe (https://github.com/felt/tippecanoe)
+ARG TIPPECANOE_VERSION=2.79.0
+RUN wget -O tippecanoe.tar.gz https://github.com/felt/tippecanoe/archive/refs/tags/${TIPPECANOE_VERSION}.tar.gz \
+    && tar -xzf tippecanoe.tar.gz \
+    && rm tippecanoe.tar.gz \
+    && cd /libraries/tippecanoe-${TIPPECANOE_VERSION} \
+    && make -j"$(nproc)" \
+    && make install PREFIX=/usr/local
