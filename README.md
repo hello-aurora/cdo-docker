@@ -1,6 +1,6 @@
 # CDO Docker
 
-This is the Dockerfile to build a Docker image for the Climate Data Operators (CDO) software, based on the Node 20, 22, 24 Alpine and Node 20 Bookworm images, it includes the following packages:
+This is the Dockerfile to build a Docker image for the Climate Data Operators (CDO) software, based on the Node 20, 22, 24, 26 Alpine and Node 20 Bookworm images, it includes the following packages:
 
 - CDO, v2.4.4
 - EcCodes, v2.34.1
@@ -18,6 +18,8 @@ FROM jeremybarbet/cdo:20-alpine
 FROM jeremybarbet/cdo:22-alpine
 # or
 FROM jeremybarbet/cdo:24-alpine
+# or
+FROM jeremybarbet/cdo:26-alpine
 ```
 
 ### Bookworm images
